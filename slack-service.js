@@ -12,18 +12,19 @@ const sendVideoMessage = async (xmlFeed) => {
         const cache = new InMemoryCache();
         const options = { ignoreAttributes: false };
         const feed = parser.parse(xmlFeed, options).feed;
-        let keyMatch = feed.entry.link['@_href'].match(/v=([^&#]{5,})/);
-        if (keyMatch.length > 0 && cache.isOnCache(keyMatch[1])) {
-            return
-        } else if (keyMatch.length > 0){
-            cache.add(keyMatch[1], true);
-        }
+
         if (feed['at:deleted-entry']) {
             return;
         }
 
+        if (cache.isOnCache(feed.entry.id)) {
+            return;
+        }
+
+        cache.add(feed.entry.id, true);
+
         const text = `*${feed.entry.author.name}* subió un video :pog:
-    ${feed.entry.link['@_href']}`;
+${feed.entry.link['@_href']}`;
         await bot.chat.postMessage({ channel: SLACK_CHANNEL, text});
     }
     catch(err) {
