@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "forever": "node_modules/.bin/forever start server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
   },
@@ -16,5 +17,8 @@
     "express": "^4.17.1",
     "fast-xml-parser": "^3.17.4",
     "slack": "^11.0.2"
+  },
+  "devDependencies": {
+    "forever": "^3.0.0"
   }
 }
