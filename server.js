@@ -10,6 +10,10 @@ const app = express();
 
 app.use(express.text({ type: 'application/atom+xml' }));
 
+app.get('/', (req) => {
+    return res.status(200).send({message: 'ok'});
+});
+
 app.get('/youtube/callback', async (req, res) => {
     if (req.query && req.query['hub.challenge']) {
         scheduleRefresh(req.query['hub.topic'], req.query['hub.lease_seconds']);
