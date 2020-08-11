@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.text({ type: 'application/atom+xml' }));
 
-app.get('/', (req) => {
+app.get('/', (req, res) => {
     return res.status(200).send({message: 'ok'});
 });
 
